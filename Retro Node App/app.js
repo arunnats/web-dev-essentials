@@ -59,8 +59,7 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("public/views"));
-app.set("views", path.join(__dirname, "public/views"));
+app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
@@ -113,9 +112,9 @@ app.get("/signup", (req, res) => {
 
 app.get("/change-password", (req, res) => {
 	if (req.isAuthenticated()) {
-		res.redirect("/content");
-	} else {
 		res.render("changepassword");
+	} else {
+		res.redirect("/content");
 	}
 });
 
